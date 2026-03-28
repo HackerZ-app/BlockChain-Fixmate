@@ -22,6 +22,7 @@ import platform
 
 from flask import Flask, render_template, request, jsonify, session
 from ai_engine import find_matches, precompute
+from blockchain import safe_send_hush_metric, hush_status  # type: ignore
 try:
     from db import init_db
 except Exception:
@@ -1180,14 +1181,27 @@ def feedback():
             solution_description=solution_description,
             result=result,
         )
-        new_rate = int(get_solution_success_rate(solution_command) * 100)
-        return jsonify(
+
+        # Send a lightweight Hush Chain event in background context.
+        hush_result = safe_send_hush_metric(
+            "fix_outcome",
             {
-                "success": True,
-                "new_success_rate": new_rate,
-                "message": f"Thanks! Success rate updated to {new_rate}%",
-            }
+                "user_problem": user_error,
+                "matched_problem": matched_problem,
+                "solution_command": solution_command,
+                "solution_description": solution_description,
+                "result": result,
+            },
         )
+
+        new_rate = int(get_solution_success_rate(solution_command) * 100)
+        response_payload = {
+            "success": True,
+            "new_success_rate": new_rate,
+            "message": f"Thanks! Success rate updated to {new_rate}%",
+            "hush": hush_result,
+        }
+        return jsonify(response_payload)
     except Exception as exc:
         return jsonify({"error": f"feedback unavailable: {exc}"}), 500
 
@@ -1339,6 +1353,15 @@ def stats():
             "ai_mode": _get_ai_mode(),
         },
     })
+
+
+@app.route("/hush/status")
+def hush_status_route():
+    try:
+        status = hush_status()
+        return jsonify({"success": True, "hush_status": status})
+    except Exception as exc:
+        return jsonify({"success": False, "error": str(exc)}), 500
 
 
 @app.route("/health")
