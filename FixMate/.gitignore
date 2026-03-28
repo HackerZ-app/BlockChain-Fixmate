@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.venv/
+venv/
+env/
+
+# Logs & runtime files
+*.log
+execution_log.json
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Model / embedding caches
+sentence_transformers_cache/
+.cache/
+models/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~

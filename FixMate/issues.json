@@ -1,0 +1,2605 @@
+[
+  {
+    "problem": "clear cache / temporary files / system cleanup",
+    "solutions": [
+      {
+        "command": "cleanmgr /sagerun:1",
+        "description": "Automatically clean system and temporary files."
+      },
+      {
+        "command": "del /q /f /s %TEMP%\\*",
+        "description": "Delete all user temporary files."
+      },
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Clear DNS resolver cache."
+      }
+    ]
+  },
+  {
+    "problem": "screen flickering / display glitches",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM explorer.exe && start explorer.exe",
+        "description": "Restart Windows Explorer automatically."
+      },
+      {
+        "command": "taskkill /F /IM dwm.exe",
+        "description": "Restart Desktop Window Manager automatically."
+      }
+    ]
+  },
+  {
+    "problem": "wifi / internet connection not working",
+    "solutions": [
+      {
+        "command": "netsh winsock reset",
+        "description": "Reset Windows network stack."
+      },
+      {
+        "command": "ipconfig /release && ipconfig /renew",
+        "description": "Release and renew IP address."
+      },
+      {
+        "command": "netsh int ip reset",
+        "description": "Reset TCP/IP configuration."
+      }
+    ]
+  },
+  {
+    "problem": "computer won't boot / black screen",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted system files."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair Windows system image."
+      }
+    ]
+  },
+  {
+    "problem": "slow performance / lag",
+    "solutions": [
+      {
+        "command": "cleanmgr /sagerun:1",
+        "description": "Free disk space automatically."
+      }
+    ]
+  },
+  {
+    "problem": "blue screen (BSOD crash)",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system file corruption."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair Windows component store."
+      }
+    ]
+  },
+  {
+    "problem": "audio not working",
+    "solutions": [
+      {
+        "command": "net stop Audiosrv && net start Audiosrv",
+        "description": "Restart Windows Audio service."
+      }
+    ]
+  },
+  {
+    "problem": "printer not printing",
+    "solutions": [
+      {
+        "command": "net stop spooler && net start spooler",
+        "description": "Restart Print Spooler service."
+      }
+    ]
+  },
+  {
+    "problem": "windows updates failing",
+    "solutions": [
+      {
+        "command": "net stop wuauserv && net stop cryptsvc && net stop bits && net stop msiserver",
+        "description": "Stop Windows Update services."
+      },
+      {
+        "command": "ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old",
+        "description": "Clear Windows Update cache."
+      },
+      {
+        "command": "net start wuauserv && net start cryptsvc && net start bits && net start msiserver",
+        "description": "Restart Windows Update services."
+      }
+    ]
+  },
+  {
+    "problem": "file permission / access denied",
+    "solutions": [
+      {
+        "command": "takeown /f \"%USERPROFILE%\" /r /d y",
+        "description": "Take ownership of current user profile folder to restore access."
+      },
+      {
+        "command": "icacls \"%USERPROFILE%\" /grant %username%:F /t",
+        "description": "Grant full permissions on user profile to current user."
+      }
+    ]
+  },
+  {
+    "problem": "windows defender disabled",
+    "solutions": [
+      {
+        "command": "sc config WinDefend start= auto",
+        "description": "Set Windows Defender to auto-start."
+      },
+      {
+        "command": "net start WinDefend",
+        "description": "Start Windows Defender service."
+      }
+    ]
+  },
+  {
+    "problem": "system time incorrect",
+    "solutions": [
+      {
+        "command": "w32tm /resync /force",
+        "description": "Force time synchronization."
+      }
+    ]
+  },
+  {
+    "problem": "windows store not working",
+    "solutions": [
+      {
+        "command": "wsreset.exe",
+        "description": "Reset Microsoft Store cache."
+      }
+    ]
+  },
+  {
+    "problem": "system file corruption",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Scan and repair system files."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair Windows image corruption."
+      }
+    ]
+  },
+  {
+    "problem": "disk errors",
+    "solutions": [
+      {
+        "command": "chkdsk /f",
+        "description": "Schedule disk repair on next reboot."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x0000007E SYSTEM_THREAD_EXCEPTION_NOT_HANDLED",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Scan and repair corrupted system files that may cause this stop code."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Restore the Windows component store to fix underlying image corruption."
+      },
+      {
+        "command": "verifier /reset",
+        "description": "Disable Driver Verifier settings that might trigger this BSOD."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0xC000021A STATUS_SYSTEM_PROCESS_TERMINATED",
+    "solutions": [
+      {
+        "command": "dism /online /cleanup-image /checkhealth",
+        "description": "Check the Windows image for corruption before attempting a repair."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows system image to resolve critical process failures."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Replace corrupted winlogon or csrss system files causing this error."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x0000003B SYSTEM_SERVICE_EXCEPTION",
+    "solutions": [
+      {
+        "command": "verifier /query",
+        "description": "Check current Driver Verifier settings to identify problematic drivers."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "List all third-party drivers to identify recently installed ones causing the crash."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that kernel-mode services depend on."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x00000050 PAGE_FAULT_IN_NONPAGED_AREA",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted files that may cause invalid memory page references."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Restore the Windows image to fix memory-related system errors."
+      },
+      {
+        "command": "chkdsk /f /r C:",
+        "description": "Check and repair disk errors that can cause non-paged pool corruption."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x0000009F DRIVER_POWER_STATE_FAILURE",
+    "solutions": [
+      {
+        "command": "powercfg /energy",
+        "description": "Generate a power efficiency report to identify driver power state issues."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "Enumerate all third-party drivers to find power-management offenders."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that power management components depend on."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x000000D1 DRIVER_IRQL_NOT_LESS_OR_EQUAL",
+    "solutions": [
+      {
+        "command": "verifier /standard /all",
+        "description": "Enable standard Driver Verifier to identify the driver causing the IRQL violation (reboot required)."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "List all non-Microsoft drivers to find the recently added one causing the crash."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows component store to fix kernel driver dependencies."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x0000007A KERNEL_DATA_INPAGE_ERROR",
+    "solutions": [
+      {
+        "command": "chkdsk /f /r C:",
+        "description": "Scan and repair bad sectors on the system drive causing read failures."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Replace corrupted paging file or kernel data components."
+      },
+      {
+        "command": "wmic diskdrive get status",
+        "description": "Check disk health status to identify a failing drive."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x00000024 NTFS_FILE_SYSTEM",
+    "solutions": [
+      {
+        "command": "chkdsk /f /r C:",
+        "description": "Repair NTFS file system errors and recover bad sectors on the system drive."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted NTFS driver or file system metadata."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Restore the Windows image to fix underlying NTFS stack components."
+      }
+    ]
+  },
+  {
+    "problem": "BSOD stop code 0x0000001E KMODE_EXCEPTION_NOT_HANDLED",
+    "solutions": [
+      {
+        "command": "verifier /reset",
+        "description": "Reset Driver Verifier to its default state to prevent false-positive crash triggers."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "List third-party drivers to locate the one generating the unhandled exception."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair core kernel files that handle exception dispatching."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update error 0x80070005 ACCESS_DENIED",
+    "solutions": [
+      {
+        "command": "net stop wuauserv && net stop cryptsvc && net stop bits",
+        "description": "Stop Windows Update services before clearing cached data."
+      },
+      {
+        "command": "icacls C:\\Windows\\SoftwareDistribution /grant SYSTEM:F /t",
+        "description": "Restore full SYSTEM permissions on the SoftwareDistribution folder."
+      },
+      {
+        "command": "net start wuauserv && net start cryptsvc && net start bits",
+        "description": "Restart Windows Update services after fixing permissions."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update error 0x8024402C cannot connect to update servers",
+    "solutions": [
+      {
+        "command": "netsh winhttp reset proxy",
+        "description": "Reset WinHTTP proxy settings that may block update server connections."
+      },
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Flush DNS cache to resolve stale update server name lookups."
+      },
+      {
+        "command": "net stop wuauserv && ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old && net start wuauserv",
+        "description": "Clear the update cache and restart the Windows Update service."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update error 0x800F0922 CBS_E_INSTALLERS_FAILED",
+    "solutions": [
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image before retrying the failed update."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Replace corrupted system files that prevent package installation."
+      },
+      {
+        "command": "net stop wuauserv && ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old && net start wuauserv",
+        "description": "Reset the update cache to allow a clean download of the failed package."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update stuck at 0% downloading",
+    "solutions": [
+      {
+        "command": "net stop wuauserv && net stop bits",
+        "description": "Stop the update and BITS services to reset the download queue."
+      },
+      {
+        "command": "ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old",
+        "description": "Rename the download cache folder so Windows recreates it on next start."
+      },
+      {
+        "command": "net start wuauserv && net start bits",
+        "description": "Restart update services so downloads resume from a clean state."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update error 0x80073712 component store corruption",
+    "solutions": [
+      {
+        "command": "dism /online /cleanup-image /scanhealth",
+        "description": "Scan the component store for corruption before repairing."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the component store to resolve 0x80073712 errors."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that the component store references."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update service not running",
+    "solutions": [
+      {
+        "command": "sc config wuauserv start= auto",
+        "description": "Set the Windows Update service to start automatically."
+      },
+      {
+        "command": "net start wuauserv",
+        "description": "Start the Windows Update service immediately."
+      },
+      {
+        "command": "sc start wuauserv",
+        "description": "Alternative command to start the Windows Update service."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update error 0x80070490 element not found",
+    "solutions": [
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore missing update components."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Scan and restore missing system files referenced by the update."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Update full reset and force check",
+    "solutions": [
+      {
+        "command": "net stop wuauserv && net stop cryptsvc && net stop bits && net stop msiserver",
+        "description": "Stop all Windows Update related services."
+      },
+      {
+        "command": "ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old && ren C:\\Windows\\System32\\catroot2 catroot2.old",
+        "description": "Rename both update cache folders to force a full reset."
+      },
+      {
+        "command": "net start wuauserv && net start cryptsvc && net start bits && net start msiserver",
+        "description": "Restart all services and trigger a fresh update check."
+      }
+    ]
+  },
+  {
+    "problem": "GPU driver crash / display driver stopped responding",
+    "solutions": [
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "List installed display drivers to identify the version causing crashes."
+      },
+      {
+        "command": "dism /online /get-drivers /format:table",
+        "description": "List all third-party drivers in table format including GPU drivers."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that the display driver stack depends on."
+      }
+    ]
+  },
+  {
+    "problem": "Display driver failed to install from Windows Update",
+    "solutions": [
+      {
+        "command": "pnputil /add-driver \"%USERPROFILE%\\Downloads\\driver.inf\" /install",
+        "description": "Manually install a downloaded GPU driver INF file."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image so driver packages can install correctly."
+      }
+    ]
+  },
+  {
+    "problem": "Black screen after GPU driver update",
+    "solutions": [
+      {
+        "command": "pnputil /delete-driver oem*.inf /uninstall /force",
+        "description": "Remove the problematic third-party GPU driver package."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image after driver removal."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair any system files corrupted during the bad driver installation."
+      }
+    ]
+  },
+  {
+    "problem": "GPU not detected in Device Manager",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force Windows to rescan and re-enumerate all PnP devices including the GPU."
+      },
+      {
+        "command": "sc query plugplay",
+        "description": "Check that the Plug and Play service is running, which is required for device detection."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore PnP driver database entries."
+      }
+    ]
+  },
+  {
+    "problem": "Second monitor not detected after driver update",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Rescan for connected display devices and re-enumerate the monitor."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "Verify the correct display driver is installed for multi-monitor support."
+      }
+    ]
+  },
+  {
+    "problem": "Display resolution stuck at 800x600 after reboot",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force re-enumeration of the display adapter to reload driver capabilities."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore display driver registry entries."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted display driver system files."
+      }
+    ]
+  },
+  {
+    "problem": "GPU status and driver version check via command line",
+    "solutions": [
+      {
+        "command": "wmic path win32_videocontroller get name,status,driverversion",
+        "description": "Check GPU name, status, and driver version from the command line."
+      },
+      {
+        "command": "powercfg /query",
+        "description": "Review power plan settings that may affect GPU throttling behavior."
+      }
+    ]
+  },
+  {
+    "problem": "DirectX error after GPU driver reinstall",
+    "solutions": [
+      {
+        "command": "dxdiag /t %USERPROFILE%\\Desktop\\dxdiag_output.txt",
+        "description": "Run DirectX diagnostics and save output to a text file for analysis."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair DirectX system DLLs that may have been corrupted."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Restore DirectX components via the Windows image repair."
+      }
+    ]
+  },
+  {
+    "problem": "No audio output - audio service not running",
+    "solutions": [
+      {
+        "command": "net stop Audiosrv && net start Audiosrv",
+        "description": "Restart the Windows Audio service to restore sound output."
+      },
+      {
+        "command": "sc config Audiosrv start= auto",
+        "description": "Ensure the Windows Audio service is set to start automatically."
+      },
+      {
+        "command": "net stop AudioEndpointBuilder && net start AudioEndpointBuilder",
+        "description": "Restart the Audio Endpoint Builder service required for device detection."
+      }
+    ]
+  },
+  {
+    "problem": "Audio driver missing after Windows update",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force Windows to rescan and reinstall the audio device driver."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "List all installed audio drivers to verify the correct one is present."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore audio driver package components."
+      }
+    ]
+  },
+  {
+    "problem": "Audio device showing as disabled in system",
+    "solutions": [
+      {
+        "command": "sc config Audiosrv start= auto && net start Audiosrv",
+        "description": "Configure and start the Windows Audio service."
+      },
+      {
+        "command": "sc config AudioEndpointBuilder start= auto && net start AudioEndpointBuilder",
+        "description": "Configure and start the Audio Endpoint Builder service."
+      }
+    ]
+  },
+  {
+    "problem": "High definition audio device not working",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Trigger a PnP device scan to detect and reinstall the HD audio device."
+      },
+      {
+        "command": "net stop Audiosrv && net stop AudioEndpointBuilder && net start AudioEndpointBuilder && net start Audiosrv",
+        "description": "Restart both audio services in the correct dependency order."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted HD audio driver system files."
+      }
+    ]
+  },
+  {
+    "problem": "Audio crackling or popping sound",
+    "solutions": [
+      {
+        "command": "net stop Audiosrv && net start Audiosrv",
+        "description": "Restart the audio service to clear buffer issues causing crackling."
+      },
+      {
+        "command": "powercfg /setactive SCHEME_MIN",
+        "description": "Switch to High Performance power plan to prevent USB audio under-clocking."
+      }
+    ]
+  },
+  {
+    "problem": "Microphone not detected by Windows",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force a device rescan to detect the microphone hardware."
+      },
+      {
+        "command": "net stop Audiosrv && net start Audiosrv",
+        "description": "Restart audio services to refresh microphone endpoint detection."
+      },
+      {
+        "command": "sc query stisvc",
+        "description": "Check if the Windows Image Acquisition service is interfering with audio devices."
+      }
+    ]
+  },
+  {
+    "problem": "HDMI audio not working after display driver update",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Rescan devices to re-enumerate the HDMI audio endpoint."
+      },
+      {
+        "command": "net stop Audiosrv && net stop AudioEndpointBuilder && net start AudioEndpointBuilder && net start Audiosrv",
+        "description": "Restart audio services in order to refresh HDMI audio endpoint registration."
+      }
+    ]
+  },
+  {
+    "problem": "Audio service crashes repeatedly",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted audio service executable or DLL files."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Restore the Windows image to fix audio subsystem corruption."
+      },
+      {
+        "command": "sc config Audiosrv start= auto",
+        "description": "Ensure the audio service is configured to auto-restart after a crash."
+      }
+    ]
+  },
+  {
+    "problem": "USB device not recognized - unknown device error",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force Windows to rescan USB buses and re-enumerate the connected device."
+      },
+      {
+        "command": "sc query usb3mon",
+        "description": "Check Intel USB 3.0 Monitor service status for enumeration conflicts."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore USB driver components."
+      }
+    ]
+  },
+  {
+    "problem": "USB device keeps disconnecting and reconnecting",
+    "solutions": [
+      {
+        "command": "powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0",
+        "description": "Disable USB selective suspend to prevent the port from powering off the device."
+      },
+      {
+        "command": "powercfg /setdcvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0",
+        "description": "Disable USB selective suspend on battery to keep devices connected."
+      }
+    ]
+  },
+  {
+    "problem": "USB 3.0 port not working at full speed",
+    "solutions": [
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "Check if the correct USB 3.0 host controller driver is installed."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Rescan USB devices to re-detect the USB 3.0 controller."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair Windows image to restore USB 3.0 driver components."
+      }
+    ]
+  },
+  {
+    "problem": "USB flash drive not showing in File Explorer",
+    "solutions": [
+      {
+        "command": "wmic logicaldisk get name,description,volumename",
+        "description": "List all logical disks to verify if the USB drive is detected without a drive letter."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force device rescan to detect the USB mass storage device."
+      }
+    ]
+  },
+  {
+    "problem": "USB hub not working after Windows update",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Re-enumerate USB hubs and downstream devices."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "Verify USB hub driver is present and correctly installed."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted USB hub driver files."
+      }
+    ]
+  },
+  {
+    "problem": "USB printer not detected by Windows",
+    "solutions": [
+      {
+        "command": "net stop spooler && net start spooler",
+        "description": "Restart the print spooler to force re-detection of USB-connected printers."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Rescan PnP devices to detect the USB printer."
+      }
+    ]
+  },
+  {
+    "problem": "USB selective suspend causing device failures",
+    "solutions": [
+      {
+        "command": "powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0",
+        "description": "Disable USB selective suspend on AC power to prevent device power-off."
+      },
+      {
+        "command": "powercfg /change -standby-timeout-ac 0",
+        "description": "Set system to never sleep on AC power to prevent USB disconnections."
+      }
+    ]
+  },
+  {
+    "problem": "USB device driver installation fails repeatedly",
+    "solutions": [
+      {
+        "command": "pnputil /add-driver \"%USERPROFILE%\\Downloads\\usb_driver.inf\" /install",
+        "description": "Manually install the USB device driver from a downloaded INF file."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair Windows image so driver installation infrastructure works correctly."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files required for driver installation."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth service not running",
+    "solutions": [
+      {
+        "command": "sc start bthserv",
+        "description": "Start the Bluetooth Support Service."
+      },
+      {
+        "command": "sc config bthserv start= auto",
+        "description": "Set the Bluetooth service to start automatically on boot."
+      },
+      {
+        "command": "net stop bthserv && net start bthserv",
+        "description": "Restart the Bluetooth Support Service to clear any stuck state."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth adapter not detected in Windows",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force a device rescan to re-detect the Bluetooth adapter."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "List installed Bluetooth drivers to verify the adapter driver is present."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore Bluetooth driver package components."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth device fails to pair",
+    "solutions": [
+      {
+        "command": "net stop bthserv && net start bthserv",
+        "description": "Restart the Bluetooth service to reset the pairing subsystem."
+      },
+      {
+        "command": "sc query bthserv",
+        "description": "Verify the Bluetooth service status before attempting to pair."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth driver missing after Windows reinstall",
+    "solutions": [
+      {
+        "command": "pnputil /add-driver \"%USERPROFILE%\\Downloads\\bt_driver.inf\" /install",
+        "description": "Install the Bluetooth driver from a downloaded INF package."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Scan for new devices so Windows can auto-install the Bluetooth driver."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore built-in Bluetooth driver support."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth keeps turning off automatically",
+    "solutions": [
+      {
+        "command": "sc config bthserv start= auto",
+        "description": "Prevent the Bluetooth service from being stopped by setting it to auto-start."
+      },
+      {
+        "command": "powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0",
+        "description": "Disable USB selective suspend which can power off internal Bluetooth adapters."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth audio device disconnects frequently",
+    "solutions": [
+      {
+        "command": "net stop bthserv && net start bthserv",
+        "description": "Restart the Bluetooth service to reset the audio device connection."
+      },
+      {
+        "command": "net stop Audiosrv && net start Audiosrv",
+        "description": "Restart Windows Audio to clear Bluetooth audio endpoint issues."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth not showing in Settings after update",
+    "solutions": [
+      {
+        "command": "sc start bthserv",
+        "description": "Start the Bluetooth service so it appears in Windows Settings."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Re-enumerate devices so the Bluetooth adapter registers with the OS."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that expose the Bluetooth settings page."
+      }
+    ]
+  },
+  {
+    "problem": "Bluetooth device shows paired but not connected",
+    "solutions": [
+      {
+        "command": "net stop bthserv && net start bthserv",
+        "description": "Restart the Bluetooth stack to clear stale connection state."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force device re-enumeration to refresh the Bluetooth device connection."
+      }
+    ]
+  },
+  {
+    "problem": "svchost.exe consuming 100% CPU",
+    "solutions": [
+      {
+        "command": "sc query wuauserv",
+        "description": "Check if Windows Update service is the svchost process consuming CPU."
+      },
+      {
+        "command": "net stop wuauserv",
+        "description": "Stop Windows Update service to immediately reduce svchost CPU usage."
+      },
+      {
+        "command": "tasklist /svc /fi \"imagename eq svchost.exe\"",
+        "description": "List all services hosted under svchost to identify the CPU-hungry one."
+      }
+    ]
+  },
+  {
+    "problem": "Antimalware Service Executable high CPU usage",
+    "solutions": [
+      {
+        "command": "sc config WdNisSvc start= disabled",
+        "description": "Disable Windows Defender Network Inspection Service to reduce CPU load."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan\" /v ScheduleDay /t REG_DWORD /d 8 /f",
+        "description": "Set Defender scan schedule to never run automatically."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan\" /v ScanOnlyIfIdle /t REG_DWORD /d 1 /f",
+        "description": "Configure Defender to only scan when the system is idle."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Modules Installer Worker high CPU",
+    "solutions": [
+      {
+        "command": "sc config TrustedInstaller start= demand",
+        "description": "Change Windows Modules Installer to manual start to prevent background CPU spikes."
+      },
+      {
+        "command": "net stop TrustedInstaller",
+        "description": "Stop the Windows Modules Installer service if it is consuming CPU."
+      }
+    ]
+  },
+  {
+    "problem": "System interrupts causing high CPU usage",
+    "solutions": [
+      {
+        "command": "powercfg /energy",
+        "description": "Generate a power efficiency report to identify driver-caused interrupt storms."
+      },
+      {
+        "command": "pnputil /enum-drivers",
+        "description": "List third-party drivers that may be generating excessive hardware interrupts."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that may cause spurious kernel-mode interrupts."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Search indexing causing 100% CPU",
+    "solutions": [
+      {
+        "command": "net stop WSearch",
+        "description": "Stop Windows Search indexing service to immediately relieve CPU load."
+      },
+      {
+        "command": "sc config WSearch start= demand",
+        "description": "Set Windows Search to manual startup to prevent indexing on boot."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /v AllowIndexingEncryptedStoresOrItems /t REG_DWORD /d 0 /f",
+        "description": "Disable indexing of encrypted content to reduce search CPU overhead."
+      }
+    ]
+  },
+  {
+    "problem": "WMI Provider Host high CPU usage",
+    "solutions": [
+      {
+        "command": "net stop winmgmt && net start winmgmt",
+        "description": "Restart the Windows Management Instrumentation service to clear WMI issues."
+      },
+      {
+        "command": "sc query winmgmt",
+        "description": "Verify WMI service state before attempting a restart."
+      }
+    ]
+  },
+  {
+    "problem": "Runtime Broker using excessive CPU",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM RuntimeBroker.exe",
+        "description": "Terminate the Runtime Broker process; Windows will restart it automatically."
+      },
+      {
+        "command": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" /v GlobalUserDisabled /t REG_DWORD /d 1 /f",
+        "description": "Disable background app access to reduce Runtime Broker CPU consumption."
+      }
+    ]
+  },
+  {
+    "problem": "Superfetch / SysMain service high CPU and disk",
+    "solutions": [
+      {
+        "command": "net stop SysMain",
+        "description": "Stop the SysMain (Superfetch) service to reduce CPU and disk usage."
+      },
+      {
+        "command": "sc config SysMain start= disabled",
+        "description": "Disable Superfetch permanently to prevent it from running on boot."
+      }
+    ]
+  },
+  {
+    "problem": "Windows using too much RAM at idle",
+    "solutions": [
+      {
+        "command": "wmic os get FreePhysicalMemory,TotalVisibleMemorySize",
+        "description": "Check total and free physical memory from the command line."
+      },
+      {
+        "command": "net stop SysMain",
+        "description": "Stop Superfetch service that pre-loads data into RAM at idle."
+      },
+      {
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v ClearPageFileAtShutdown /t REG_DWORD /d 0 /f",
+        "description": "Ensure page file is not cleared at shutdown, improving available memory."
+      }
+    ]
+  },
+  {
+    "problem": "Virtual memory / page file too small error",
+    "solutions": [
+      {
+        "command": "wmic computersystem set AutomaticManagedPagefile=True",
+        "description": "Enable Windows to automatically manage the page file size."
+      },
+      {
+        "command": "wmic pagefileset where name=\"C:\\\\pagefile.sys\" set InitialSize=2048,MaximumSize=4096",
+        "description": "Set the page file to a fixed size range on the C: drive."
+      }
+    ]
+  },
+  {
+    "problem": "Memory leak causing gradual RAM increase",
+    "solutions": [
+      {
+        "command": "tasklist /fi \"memusage gt 100000\"",
+        "description": "List all processes consuming more than 100 MB of memory."
+      },
+      {
+        "command": "net stop SysMain && net start SysMain",
+        "description": "Restart Superfetch to release cached memory it is holding."
+      },
+      {
+        "command": "wmic process where \"WorkingSetSize > 500000000\" get Name,ProcessId,WorkingSetSize",
+        "description": "Find processes consuming more than 500 MB of working set memory."
+      }
+    ]
+  },
+  {
+    "problem": "RAM not fully usable - hardware reserved memory",
+    "solutions": [
+      {
+        "command": "bcdedit /set removememory 0",
+        "description": "Remove any memory removal BCD setting that limits usable RAM."
+      },
+      {
+        "command": "bcdedit /set nolowmem no",
+        "description": "Disable low-memory BCD restriction to allow full RAM access."
+      },
+      {
+        "command": "wmic os get TotalVisibleMemorySize",
+        "description": "Verify the amount of RAM visible to the OS after boot configuration changes."
+      }
+    ]
+  },
+  {
+    "problem": "Windows running out of memory with few applications open",
+    "solutions": [
+      {
+        "command": "tasklist /v /fo list",
+        "description": "List all running processes with memory usage to identify the culprit."
+      },
+      {
+        "command": "wmic computersystem set AutomaticManagedPagefile=True",
+        "description": "Let Windows automatically size the page file to handle memory pressure."
+      }
+    ]
+  },
+  {
+    "problem": "Page file disabled causing low memory errors",
+    "solutions": [
+      {
+        "command": "wmic computersystem set AutomaticManagedPagefile=True",
+        "description": "Re-enable automatic page file management."
+      },
+      {
+        "command": "wmic pagefileset create name=\"C:\\\\pagefile.sys\",InitialSize=2048,MaximumSize=8192",
+        "description": "Create a new page file on the C: drive with a defined size range."
+      }
+    ]
+  },
+  {
+    "problem": "Committed memory exceeds physical RAM",
+    "solutions": [
+      {
+        "command": "wmic os get FreeVirtualMemory,TotalVirtualMemorySize",
+        "description": "Check total and free virtual memory including the page file."
+      },
+      {
+        "command": "net stop SysMain",
+        "description": "Stop Superfetch to free memory it has pre-loaded."
+      },
+      {
+        "command": "wmic computersystem set AutomaticManagedPagefile=True",
+        "description": "Enable automatic page file management to handle commit charge spikes."
+      }
+    ]
+  },
+  {
+    "problem": "Memory compression causing high RAM reading in Task Manager",
+    "solutions": [
+      {
+        "command": "powershell -command \"Disable-MMAgent -mc\"",
+        "description": "Disable Windows memory compression to reduce compressed memory overhead."
+      },
+      {
+        "command": "powershell -command \"Get-MMAgent\"",
+        "description": "Check current Memory Manager Agent settings including compression state."
+      }
+    ]
+  },
+  {
+    "problem": "Windows not activated - product key invalid",
+    "solutions": [
+      {
+        "command": "slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX",
+        "description": "Install a new product key (replace X characters with your actual key)."
+      },
+      {
+        "command": "slmgr /ato",
+        "description": "Attempt online activation with the currently installed product key."
+      }
+    ]
+  },
+  {
+    "problem": "Windows activation error 0xC004F074 KMS server unavailable",
+    "solutions": [
+      {
+        "command": "slmgr /skms kms.server.address",
+        "description": "Configure a specific KMS server address for volume activation."
+      },
+      {
+        "command": "slmgr /ato",
+        "description": "Attempt activation against the configured KMS server."
+      },
+      {
+        "command": "slmgr /dlv",
+        "description": "Display detailed licensing information including KMS connection status."
+      }
+    ]
+  },
+  {
+    "problem": "Windows activation grace period expired",
+    "solutions": [
+      {
+        "command": "slmgr /rearm",
+        "description": "Reset the Windows activation timer for an additional grace period (limited uses)."
+      },
+      {
+        "command": "slmgr /xpr",
+        "description": "Check the current activation expiration date."
+      }
+    ]
+  },
+  {
+    "problem": "Windows activation error 0x80070005 access denied",
+    "solutions": [
+      {
+        "command": "slmgr /ato",
+        "description": "Run activation from an elevated command prompt to resolve access denied errors."
+      },
+      {
+        "command": "net start sppsvc",
+        "description": "Start the Software Protection service required for activation."
+      },
+      {
+        "command": "sc config sppsvc start= auto",
+        "description": "Set Software Protection service to auto-start so activation works."
+      }
+    ]
+  },
+  {
+    "problem": "Windows license information showing incorrect edition",
+    "solutions": [
+      {
+        "command": "slmgr /dlv",
+        "description": "Display detailed license information including edition and key type."
+      },
+      {
+        "command": "slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX",
+        "description": "Install the correct product key for your Windows edition."
+      }
+    ]
+  },
+  {
+    "problem": "Windows activation fails after hardware change",
+    "solutions": [
+      {
+        "command": "slmgr /ato",
+        "description": "Attempt re-activation online after hardware change."
+      },
+      {
+        "command": "slmgr /dlv",
+        "description": "Check activation status and key type to determine next steps."
+      }
+    ]
+  },
+  {
+    "problem": "Volume activation KMS client not finding server",
+    "solutions": [
+      {
+        "command": "slmgr /skms kms.domain.local:1688",
+        "description": "Point the machine to the correct KMS server on port 1688."
+      },
+      {
+        "command": "slmgr /ato",
+        "description": "Activate against the configured KMS server."
+      },
+      {
+        "command": "nslookup -type=srv _vlmcs._tcp",
+        "description": "Verify that the KMS SRV DNS record is resolvable from this machine."
+      }
+    ]
+  },
+  {
+    "problem": "Microsoft Store not opening or crashing on launch",
+    "solutions": [
+      {
+        "command": "wsreset.exe",
+        "description": "Clear Microsoft Store cache and restart the Store app."
+      },
+      {
+        "command": "powershell -command \"Get-AppxPackage *WindowsStore* | Remove-AppxPackage\"",
+        "description": "Remove the Microsoft Store package so it can be reinstalled."
+      },
+      {
+        "command": "powershell -command \"Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($env:SystemRoot)\\WinStore\\AppxManifest.xml\\\"\"",
+        "description": "Re-register the Microsoft Store app from its existing installation."
+      }
+    ]
+  },
+  {
+    "problem": "Microsoft Store app download stuck at 0%",
+    "solutions": [
+      {
+        "command": "wsreset.exe",
+        "description": "Reset the Store cache to unblock stuck downloads."
+      },
+      {
+        "command": "net stop wuauserv && net start wuauserv",
+        "description": "Restart Windows Update service which backs Store downloads."
+      }
+    ]
+  },
+  {
+    "problem": "Microsoft Store error 0x80131505",
+    "solutions": [
+      {
+        "command": "wsreset.exe",
+        "description": "Reset the Microsoft Store to clear the 0x80131505 error state."
+      },
+      {
+        "command": "powershell -command \"Get-AppxPackage -AllUsers *WindowsStore* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($_.InstallLocation)\\AppXManifest.xml\\\"}\"",
+        "description": "Re-register the Store for all user accounts to fix the error."
+      }
+    ]
+  },
+  {
+    "problem": "Microsoft Store apps failing to update",
+    "solutions": [
+      {
+        "command": "wsreset.exe",
+        "description": "Clear the Store cache so update metadata can be refreshed."
+      },
+      {
+        "command": "net stop wuauserv && ren C:\\Windows\\SoftwareDistribution SoftwareDistribution.old && net start wuauserv",
+        "description": "Reset the Windows Update cache which Store updates depend on."
+      }
+    ]
+  },
+  {
+    "problem": "Microsoft Store missing from Windows after upgrade",
+    "solutions": [
+      {
+        "command": "powershell -command \"Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($env:SystemRoot)\\WinStore\\AppxManifest.xml\\\"\"",
+        "description": "Re-register the Microsoft Store from the existing system files."
+      },
+      {
+        "command": "powershell -command \"Get-AppxPackage -AllUsers *WindowsStore*\"",
+        "description": "Check if the Store package exists for any user accounts."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that the Store application depends on."
+      }
+    ]
+  },
+  {
+    "problem": "Store app installation blocked by policy",
+    "solutions": [
+      {
+        "command": "reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsStore\" /v DisableStoreApps /f",
+        "description": "Remove the policy that disables Store app installation."
+      },
+      {
+        "command": "reg delete \"HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsStore\" /v RequirePrivateStoreOnly /f",
+        "description": "Remove the private-store-only restriction from Store policies."
+      }
+    ]
+  },
+  {
+    "problem": "Microsoft Store sign-in failing",
+    "solutions": [
+      {
+        "command": "wsreset.exe",
+        "description": "Clear Store credentials cache and force a fresh sign-in."
+      },
+      {
+        "command": "net stop wlidsvc && net start wlidsvc",
+        "description": "Restart the Microsoft Account Sign-in Assistant service."
+      }
+    ]
+  },
+  {
+    "problem": "Re-register all Windows Store apps after corruption",
+    "solutions": [
+      {
+        "command": "powershell -command \"Get-AppxPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($_.InstallLocation)\\AppXManifest.xml\\\"}\"",
+        "description": "Re-register all installed Store apps for all users."
+      },
+      {
+        "command": "wsreset.exe",
+        "description": "Reset the Store cache after re-registering all packages."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Search not returning results",
+    "solutions": [
+      {
+        "command": "net stop WSearch && net start WSearch",
+        "description": "Restart Windows Search service to restore search functionality."
+      },
+      {
+        "command": "sc config WSearch start= auto",
+        "description": "Ensure Windows Search is set to start automatically."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted Search service files."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Search index corrupted",
+    "solutions": [
+      {
+        "command": "net stop WSearch",
+        "description": "Stop the Search service before clearing the index."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Search\" /v SetupCompletedSuccessfully /t REG_DWORD /d 0 /f",
+        "description": "Flag the search index for rebuild on next service start."
+      },
+      {
+        "command": "net start WSearch",
+        "description": "Start the Search service which will now rebuild the index."
+      }
+    ]
+  },
+  {
+    "problem": "File search not finding recently created files",
+    "solutions": [
+      {
+        "command": "net stop WSearch && net start WSearch",
+        "description": "Restart indexing service to pick up newly created files."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Search\" /v SetupCompletedSuccessfully /t REG_DWORD /d 0 /f",
+        "description": "Force index rebuild so new files are included in search results."
+      }
+    ]
+  },
+  {
+    "problem": "Search bar missing from taskbar",
+    "solutions": [
+      {
+        "command": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search\" /v SearchboxTaskbarMode /t REG_DWORD /d 2 /f",
+        "description": "Restore the search box on the taskbar to full visible mode."
+      },
+      {
+        "command": "taskkill /F /IM explorer.exe && start explorer.exe",
+        "description": "Restart Explorer to apply the taskbar search box registry change."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Search indexing very slow",
+    "solutions": [
+      {
+        "command": "net stop WSearch",
+        "description": "Temporarily stop indexing to free resources, then restart during idle time."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Search\\Gather\\Windows\\SystemIndex\" /v MaxGatheringThreadCount /t REG_DWORD /d 1 /f",
+        "description": "Limit search indexing to one thread to reduce CPU and disk impact."
+      },
+      {
+        "command": "net start WSearch",
+        "description": "Restart the Search service with the reduced thread count setting."
+      }
+    ]
+  },
+  {
+    "problem": "Search shows no results for installed apps",
+    "solutions": [
+      {
+        "command": "powershell -command \"Get-AppxPackage -AllUsers | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($_.InstallLocation)\\AppXManifest.xml\\\"}\"",
+        "description": "Re-register all apps so the Search index can include them."
+      },
+      {
+        "command": "net stop WSearch && net start WSearch",
+        "description": "Restart Windows Search to re-index app entries."
+      }
+    ]
+  },
+  {
+    "problem": "Cortana search not working",
+    "solutions": [
+      {
+        "command": "net stop WSearch && net start WSearch",
+        "description": "Restart the Windows Search service that Cortana depends on."
+      },
+      {
+        "command": "powershell -command \"Get-AppxPackage -AllUsers *Microsoft.Windows.Cortana* | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register \\\"$($_.InstallLocation)\\AppXManifest.xml\\\"}\"",
+        "description": "Re-register the Cortana app package."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Search service crashes repeatedly",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted Search service binary files."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to fix the Search service infrastructure."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Search\" /v SetupCompletedSuccessfully /t REG_DWORD /d 0 /f",
+        "description": "Flag the index for rebuild which often resolves repeated service crashes."
+      }
+    ]
+  },
+  {
+    "problem": "Windows taking too long to boot",
+    "solutions": [
+      {
+        "command": "sc config SysMain start= disabled",
+        "description": "Disable Superfetch to reduce early-boot disk activity."
+      },
+      {
+        "command": "powercfg /h off",
+        "description": "Disable hibernation which can slow startup if hibernate file is large."
+      },
+      {
+        "command": "bcdedit /set {current} bootmenupolicy standard",
+        "description": "Enable advanced boot menu for diagnostic mode access."
+      }
+    ]
+  },
+  {
+    "problem": "Startup programs slowing boot time",
+    "solutions": [
+      {
+        "command": "wmic startup get Caption,Command,Location",
+        "description": "List all startup programs with their commands and locations."
+      },
+      {
+        "command": "reg delete \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"ProgramName\" /f",
+        "description": "Remove a specific program from the current user startup list."
+      },
+      {
+        "command": "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"ProgramName\" /f",
+        "description": "Remove a specific program from the machine-wide startup list."
+      }
+    ]
+  },
+  {
+    "problem": "Slow boot due to startup services",
+    "solutions": [
+      {
+        "command": "sc config SysMain start= demand",
+        "description": "Set Superfetch to manual start to reduce boot-time disk usage."
+      },
+      {
+        "command": "sc config WSearch start= delayed-auto",
+        "description": "Delay Windows Search indexing start to improve initial boot speed."
+      },
+      {
+        "command": "sc config DiagTrack start= disabled",
+        "description": "Disable the Connected User Experiences and Telemetry service at boot."
+      }
+    ]
+  },
+  {
+    "problem": "Fast startup feature causing issues after update",
+    "solutions": [
+      {
+        "command": "powercfg /h off",
+        "description": "Disable Hibernate and Fast Startup which requires a fresh cold boot."
+      },
+      {
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v HiberbootEnabled /t REG_DWORD /d 0 /f",
+        "description": "Disable Fast Startup via registry to force a full shutdown/boot cycle."
+      }
+    ]
+  },
+  {
+    "problem": "Boot configuration data BCD corrupted causing slow boot",
+    "solutions": [
+      {
+        "command": "bcdedit /enum all",
+        "description": "List all boot configuration entries to identify duplicates or corruption."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that BCD-dependent components rely on."
+      }
+    ]
+  },
+  {
+    "problem": "Disk check running on every boot causing long startup",
+    "solutions": [
+      {
+        "command": "chkntfs /x C:",
+        "description": "Exclude the C: drive from automatic chkdsk on next boot."
+      },
+      {
+        "command": "chkdsk /f C:",
+        "description": "Schedule a one-time disk check so it does not repeat on every boot."
+      }
+    ]
+  },
+  {
+    "problem": "Windows startup repair loop",
+    "solutions": [
+      {
+        "command": "bcdedit /set {current} recoveryenabled No",
+        "description": "Disable automatic recovery mode to break out of the repair loop."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted system files triggering the recovery loop."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Restore the Windows image to stop recovery mode from triggering."
+      }
+    ]
+  },
+  {
+    "problem": "Long delays at Welcome screen during login",
+    "solutions": [
+      {
+        "command": "sc config gpsvc start= auto",
+        "description": "Ensure Group Policy Client service starts on time during login."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\" /v AutoRestartShell /t REG_DWORD /d 1 /f",
+        "description": "Enable shell auto-restart to prevent stuck login shell loading."
+      },
+      {
+        "command": "net stop netlogon && net start netlogon",
+        "description": "Restart the Netlogon service that can cause domain login delays."
+      }
+    ]
+  },
+  {
+    "problem": "Network adapter missing from Device Manager",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Force PnP device rescan to re-detect the network adapter."
+      },
+      {
+        "command": "netsh interface show interface",
+        "description": "List all network interfaces to check if the adapter is present but disabled."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair Windows image to restore network adapter driver components."
+      }
+    ]
+  },
+  {
+    "problem": "Network adapter disabled and cannot enable",
+    "solutions": [
+      {
+        "command": "netsh interface set interface \"Ethernet\" admin=enabled",
+        "description": "Enable the Ethernet network adapter interface by name."
+      },
+      {
+        "command": "netsh interface set interface \"Wi-Fi\" admin=enabled",
+        "description": "Enable the Wi-Fi network adapter interface by name."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Rescan devices after enabling the adapter to reinitialize the driver."
+      }
+    ]
+  },
+  {
+    "problem": "Network adapter driver missing after Windows reinstall",
+    "solutions": [
+      {
+        "command": "pnputil /add-driver \"%USERPROFILE%\\Downloads\\network_driver.inf\" /install",
+        "description": "Install the network adapter driver from a locally downloaded INF file."
+      },
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Scan for new devices so Windows can auto-match the network adapter."
+      }
+    ]
+  },
+  {
+    "problem": "Ethernet adapter showing as unidentified network",
+    "solutions": [
+      {
+        "command": "ipconfig /release && ipconfig /renew",
+        "description": "Release and renew the IP address to resolve unidentified network status."
+      },
+      {
+        "command": "netsh winsock reset",
+        "description": "Reset Winsock to fix broken network stack causing the unidentified network."
+      },
+      {
+        "command": "netsh int ip reset",
+        "description": "Reset TCP/IP stack to resolve the unidentified network issue."
+      }
+    ]
+  },
+  {
+    "problem": "Network adapter keeps resetting connection",
+    "solutions": [
+      {
+        "command": "netsh winsock reset",
+        "description": "Reset Winsock catalog to fix protocol stack issues causing resets."
+      },
+      {
+        "command": "netsh int ip reset",
+        "description": "Reset TCP/IP stack to stop network adapter connection resets."
+      }
+    ]
+  },
+  {
+    "problem": "Wireless adapter not showing available networks",
+    "solutions": [
+      {
+        "command": "netsh wlan show interfaces",
+        "description": "Check the wireless adapter status and connected network information."
+      },
+      {
+        "command": "netsh wlan set autoconfig enabled=yes interface=\"Wi-Fi\"",
+        "description": "Enable auto-configuration on the Wi-Fi adapter to scan for networks."
+      },
+      {
+        "command": "net stop dot3svc && net start dot3svc",
+        "description": "Restart Wired AutoConfig service that manages wireless profile connections."
+      }
+    ]
+  },
+  {
+    "problem": "Second network adapter causing IP conflict",
+    "solutions": [
+      {
+        "command": "netsh interface ip show addresses",
+        "description": "Display IP address assignments for all network adapters."
+      },
+      {
+        "command": "netsh interface set interface \"Ethernet 2\" admin=disabled",
+        "description": "Disable the conflicting second network adapter."
+      }
+    ]
+  },
+  {
+    "problem": "Network adapter shows limited connectivity",
+    "solutions": [
+      {
+        "command": "netsh winsock reset",
+        "description": "Reset Winsock to fix limited connectivity from a corrupted network stack."
+      },
+      {
+        "command": "netsh int ip reset",
+        "description": "Reset TCP/IP configuration to resolve limited connectivity."
+      },
+      {
+        "command": "ipconfig /release && ipconfig /renew",
+        "description": "Force DHCP to issue a new IP address and resolve limited connectivity."
+      }
+    ]
+  },
+  {
+    "problem": "DNS not resolving domain names",
+    "solutions": [
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Clear the DNS resolver cache to force fresh lookups."
+      },
+      {
+        "command": "netsh dns show state",
+        "description": "Check the current DNS client state and resolver configuration."
+      },
+      {
+        "command": "nslookup google.com 8.8.8.8",
+        "description": "Test DNS resolution against Google's public DNS server."
+      }
+    ]
+  },
+  {
+    "problem": "DNS Client service not running",
+    "solutions": [
+      {
+        "command": "net start Dnscache",
+        "description": "Start the DNS Client (Dnscache) service."
+      },
+      {
+        "command": "sc config Dnscache start= auto",
+        "description": "Set the DNS Client service to start automatically."
+      },
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Flush the DNS cache after restarting the service."
+      }
+    ]
+  },
+  {
+    "problem": "Wrong DNS server configured causing resolution failures",
+    "solutions": [
+      {
+        "command": "netsh interface ip set dns \"Ethernet\" static 8.8.8.8",
+        "description": "Set Google's primary DNS server on the Ethernet adapter."
+      },
+      {
+        "command": "netsh interface ip add dns \"Ethernet\" 8.8.4.4 index=2",
+        "description": "Add Google's secondary DNS server as a fallback."
+      },
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Flush DNS cache to start using the newly configured servers."
+      }
+    ]
+  },
+  {
+    "problem": "DNS cache poisoning / stale records",
+    "solutions": [
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Flush the entire DNS resolver cache to remove stale or poisoned records."
+      },
+      {
+        "command": "ipconfig /displaydns",
+        "description": "Display cached DNS entries to verify if stale records are present."
+      }
+    ]
+  },
+  {
+    "problem": "nslookup works but browser cannot resolve domains",
+    "solutions": [
+      {
+        "command": "netsh winsock reset",
+        "description": "Reset the Winsock catalog to fix the resolver gap between nslookup and browsers."
+      },
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Clear the DNS cache after resetting Winsock."
+      },
+      {
+        "command": "netsh int ip reset",
+        "description": "Reset TCP/IP stack to ensure browser network calls use the correct resolver."
+      }
+    ]
+  },
+  {
+    "problem": "IPv6 DNS leaking causing slow resolution",
+    "solutions": [
+      {
+        "command": "netsh interface ipv6 set dns \"Ethernet\" static 2001:4860:4860::8888",
+        "description": "Set Google's IPv6 DNS server to prevent fallback to slow defaults."
+      },
+      {
+        "command": "netsh interface ipv6 set dnsservers \"Ethernet\" dhcp",
+        "description": "Revert IPv6 DNS to DHCP-assigned to stop manual misconfigurations."
+      }
+    ]
+  },
+  {
+    "problem": "DNS resolution intermittently failing",
+    "solutions": [
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Clear DNS cache to force fresh resolution for each lookup."
+      },
+      {
+        "command": "netsh interface ip set dns \"Ethernet\" static 1.1.1.1",
+        "description": "Switch to Cloudflare DNS for more reliable resolution."
+      },
+      {
+        "command": "netsh interface ip add dns \"Ethernet\" 1.0.0.1 index=2",
+        "description": "Add Cloudflare secondary DNS as a fallback for reliability."
+      }
+    ]
+  },
+  {
+    "problem": "Hosts file overriding DNS causing wrong IP resolution",
+    "solutions": [
+      {
+        "command": "type C:\\Windows\\System32\\drivers\\etc\\hosts",
+        "description": "Display the hosts file contents to identify incorrect manual overrides."
+      },
+      {
+        "command": "ipconfig /flushdns",
+        "description": "Flush DNS cache after editing the hosts file to apply changes."
+      }
+    ]
+  },
+  {
+    "problem": "VPN connection fails to establish",
+    "solutions": [
+      {
+        "command": "rasdial \"VPN Connection Name\" username password",
+        "description": "Connect to a VPN from the command line with credentials."
+      },
+      {
+        "command": "netsh ras show protocols",
+        "description": "List enabled VPN protocols to verify the required protocol is active."
+      },
+      {
+        "command": "net start RasMan",
+        "description": "Start the Remote Access Connection Manager service required for VPN."
+      }
+    ]
+  },
+  {
+    "problem": "VPN service not running",
+    "solutions": [
+      {
+        "command": "sc config RasMan start= auto",
+        "description": "Set the Remote Access Connection Manager to auto-start."
+      },
+      {
+        "command": "net start RasMan",
+        "description": "Start the Remote Access Connection Manager immediately."
+      },
+      {
+        "command": "net start RemoteAccess",
+        "description": "Start the Routing and Remote Access service for VPN connectivity."
+      }
+    ]
+  },
+  {
+    "problem": "VPN disconnects after a few minutes",
+    "solutions": [
+      {
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\RasMan\\Parameters\" /v DisableSavePassword /t REG_DWORD /d 0 /f",
+        "description": "Allow saving VPN credentials to prevent authentication timeouts."
+      },
+      {
+        "command": "net stop RasMan && net start RasMan",
+        "description": "Restart the RAS Manager to reset the VPN connection state."
+      }
+    ]
+  },
+  {
+    "problem": "VPN routing all traffic incorrectly",
+    "solutions": [
+      {
+        "command": "route print",
+        "description": "Display the IP routing table to inspect VPN-added routes."
+      },
+      {
+        "command": "netsh interface ip show route",
+        "description": "Show current IP routing entries including those added by VPN."
+      },
+      {
+        "command": "rasdial \"VPN Connection Name\" /disconnect",
+        "description": "Disconnect the VPN to restore normal routing."
+      }
+    ]
+  },
+  {
+    "problem": "Split tunneling VPN routing not working",
+    "solutions": [
+      {
+        "command": "route print",
+        "description": "Verify routing table to confirm split tunnel routes are configured correctly."
+      },
+      {
+        "command": "netsh interface ip show route",
+        "description": "List interface-specific routes to debug split tunneling."
+      }
+    ]
+  },
+  {
+    "problem": "L2TP VPN error 789 L2TP connection failed",
+    "solutions": [
+      {
+        "command": "net start ikeext",
+        "description": "Start IKE and AuthIP IPsec Keying Modules service needed for L2TP."
+      },
+      {
+        "command": "sc config PolicyAgent start= auto && net start PolicyAgent",
+        "description": "Start the IPsec Policy Agent required for L2TP/IPsec VPN."
+      },
+      {
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\RasMan\\Parameters\" /v ProhibitIpSec /t REG_DWORD /d 0 /f",
+        "description": "Ensure IPsec is not disabled for L2TP VPN connections."
+      }
+    ]
+  },
+  {
+    "problem": "PPTP VPN error 619 port disconnected",
+    "solutions": [
+      {
+        "command": "netsh advfirewall firewall add rule name=\"PPTP\" protocol=TCP dir=in localport=1723 action=allow",
+        "description": "Add a firewall rule to allow inbound PPTP on port 1723."
+      },
+      {
+        "command": "net start RasMan",
+        "description": "Ensure Remote Access Connection Manager is running for PPTP."
+      }
+    ]
+  },
+  {
+    "problem": "VPN adapter missing from network connections",
+    "solutions": [
+      {
+        "command": "pnputil /scan-devices",
+        "description": "Rescan devices to re-detect the virtual VPN network adapter."
+      },
+      {
+        "command": "net start RasMan",
+        "description": "Start Remote Access Connection Manager which manages VPN adapters."
+      },
+      {
+        "command": "netsh interface show interface",
+        "description": "List all interfaces to check if the VPN adapter exists but is disabled."
+      }
+    ]
+  },
+  {
+    "problem": "Remote Desktop not enabled on target machine",
+    "solutions": [
+      {
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+        "description": "Enable Remote Desktop connections via the registry."
+      },
+      {
+        "command": "net start TermService",
+        "description": "Start the Remote Desktop Services (Terminal Services) service."
+      },
+      {
+        "command": "netsh advfirewall firewall set rule group=\"remote desktop\" new enable=yes",
+        "description": "Enable Remote Desktop firewall rules to allow inbound RDP connections."
+      }
+    ]
+  },
+  {
+    "problem": "Remote Desktop service not running",
+    "solutions": [
+      {
+        "command": "sc config TermService start= auto",
+        "description": "Set Remote Desktop Services to auto-start."
+      },
+      {
+        "command": "net start TermService",
+        "description": "Start the Remote Desktop Services immediately."
+      }
+    ]
+  },
+  {
+    "problem": "RDP port 3389 blocked by firewall",
+    "solutions": [
+      {
+        "command": "netsh advfirewall firewall add rule name=\"RDP-TCP-3389\" protocol=TCP dir=in localport=3389 action=allow",
+        "description": "Add a firewall rule to allow inbound RDP on the default port 3389."
+      },
+      {
+        "command": "netsh advfirewall firewall set rule group=\"remote desktop\" new enable=yes",
+        "description": "Enable the built-in Remote Desktop firewall rule group."
+      }
+    ]
+  },
+  {
+    "problem": "Remote Desktop error - connection was denied",
+    "solutions": [
+      {
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\" /v fDenyTSConnections /t REG_DWORD /d 0 /f",
+        "description": "Ensure RDP connections are not blocked by the registry setting."
+      },
+      {
+        "command": "net start TermService",
+        "description": "Ensure Terminal Services is running to accept connections."
+      },
+      {
+        "command": "netsh advfirewall firewall set rule group=\"remote desktop\" new enable=yes",
+        "description": "Enable firewall rules to allow the Remote Desktop connection."
+      }
+    ]
+  },
+  {
+    "problem": "Remote Desktop NLA Network Level Authentication blocking connection",
+    "solutions": [
+      {
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp\" /v UserAuthentication /t REG_DWORD /d 0 /f",
+        "description": "Disable NLA for RDP to allow connections without pre-authentication."
+      },
+      {
+        "command": "net stop TermService && net start TermService",
+        "description": "Restart Terminal Services to apply the NLA configuration change."
+      }
+    ]
+  },
+  {
+    "problem": "Remote Desktop session limit reached",
+    "solutions": [
+      {
+        "command": "query session",
+        "description": "List all active Remote Desktop sessions to see who is connected."
+      },
+      {
+        "command": "logoff 2",
+        "description": "Log off session ID 2 to free up an RDP connection slot."
+      }
+    ]
+  },
+  {
+    "problem": "Remote Desktop certificate error on connection",
+    "solutions": [
+      {
+        "command": "net stop TermService && net start TermService",
+        "description": "Restart Terminal Services to generate a fresh self-signed certificate."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\" /v fSingleSessionPerUser /t REG_DWORD /d 0 /f",
+        "description": "Allow multiple sessions to bypass certificate session limit errors."
+      }
+    ]
+  },
+  {
+    "problem": "Remote Desktop slow performance over LAN",
+    "solutions": [
+      {
+        "command": "netsh int tcp set global autotuninglevel=normal",
+        "description": "Set TCP auto-tuning to normal to optimize RDP throughput."
+      },
+      {
+        "command": "reg add \"HKCU\\Software\\Microsoft\\Terminal Server Client\" /v EnableHardwareMode /t REG_DWORD /d 1 /f",
+        "description": "Enable hardware acceleration for the RDP client."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Firewall blocking a specific application",
+    "solutions": [
+      {
+        "command": "netsh advfirewall firewall add rule name=\"Allow MyApp\" dir=in action=allow program=\"C:\\Program Files\\MyApp\\myapp.exe\" enable=yes",
+        "description": "Add an inbound firewall rule to allow a specific application."
+      },
+      {
+        "command": "netsh advfirewall firewall add rule name=\"Allow MyApp Out\" dir=out action=allow program=\"C:\\Program Files\\MyApp\\myapp.exe\" enable=yes",
+        "description": "Add an outbound firewall rule to allow the application to connect out."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Firewall service not running",
+    "solutions": [
+      {
+        "command": "net start MpsSvc",
+        "description": "Start the Windows Firewall service (MpsSvc)."
+      },
+      {
+        "command": "sc config MpsSvc start= auto",
+        "description": "Set Windows Firewall service to start automatically."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Firewall blocking port needed by application",
+    "solutions": [
+      {
+        "command": "netsh advfirewall firewall add rule name=\"Open Port 8080\" protocol=TCP dir=in localport=8080 action=allow",
+        "description": "Open TCP port 8080 in the Windows Firewall for inbound connections."
+      },
+      {
+        "command": "netsh advfirewall firewall add rule name=\"Open Port 8080 Out\" protocol=TCP dir=out localport=8080 action=allow",
+        "description": "Open TCP port 8080 for outbound connections as well."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Firewall blocking file and printer sharing",
+    "solutions": [
+      {
+        "command": "netsh advfirewall firewall set rule group=\"File and Printer Sharing\" new enable=yes",
+        "description": "Enable the built-in File and Printer Sharing firewall rule group."
+      },
+      {
+        "command": "netsh advfirewall set currentprofile settings inboundusernotification enable",
+        "description": "Enable notifications for blocked inbound connections."
+      }
+    ]
+  },
+  {
+    "problem": "Firewall policy reset to defaults needed",
+    "solutions": [
+      {
+        "command": "netsh advfirewall reset",
+        "description": "Reset Windows Firewall to its default policy state."
+      },
+      {
+        "command": "netsh advfirewall set allprofiles state on",
+        "description": "Ensure the firewall is enabled on all network profiles after reset."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Firewall blocking network discovery",
+    "solutions": [
+      {
+        "command": "netsh advfirewall firewall set rule group=\"Network Discovery\" new enable=yes profile=private",
+        "description": "Enable Network Discovery firewall rules for the private network profile."
+      },
+      {
+        "command": "sc query FDResPub",
+        "description": "Verify Function Discovery Resource Publication service is running for network discovery."
+      }
+    ]
+  },
+  {
+    "problem": "Third-party firewall conflicts with Windows Firewall",
+    "solutions": [
+      {
+        "command": "netsh advfirewall set allprofiles state on",
+        "description": "Force-enable Windows Firewall on all profiles to override third-party state."
+      },
+      {
+        "command": "sc query MpsSvc",
+        "description": "Verify the Windows Firewall service state for conflict diagnosis."
+      }
+    ]
+  },
+  {
+    "problem": "Application blocked by Windows Firewall with no notification",
+    "solutions": [
+      {
+        "command": "netsh advfirewall show allprofiles",
+        "description": "Show all firewall profiles and their notification settings."
+      },
+      {
+        "command": "netsh advfirewall set currentprofile settings inboundusernotification enable",
+        "description": "Enable user notifications when Windows Firewall blocks an app."
+      },
+      {
+        "command": "netsh advfirewall firewall show rule name=all",
+        "description": "List all firewall rules to find the one blocking the application."
+      }
+    ]
+  },
+  {
+    "problem": "User profile corrupted - temporary profile loaded at login",
+    "solutions": [
+      {
+        "command": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProfileList\"",
+        "description": "List all user profile entries in the registry to find the corrupted one."
+      },
+      {
+        "command": "icacls C:\\Users\\Username /grant Username:F /t",
+        "description": "Reset permissions on the user profile folder."
+      }
+    ]
+  },
+  {
+    "problem": "Cannot log in to user account - profile service failed",
+    "solutions": [
+      {
+        "command": "net start ProfSvc",
+        "description": "Start the User Profile Service required for profile loading."
+      },
+      {
+        "command": "sc config ProfSvc start= auto",
+        "description": "Set the User Profile Service to auto-start."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted profile service system files."
+      }
+    ]
+  },
+  {
+    "problem": "User profile folder permissions broken",
+    "solutions": [
+      {
+        "command": "takeown /f C:\\Users\\Username /r /d y",
+        "description": "Take ownership of the entire user profile folder recursively."
+      },
+      {
+        "command": "icacls C:\\Users\\Username /grant Username:F /t",
+        "description": "Grant full permissions to the user on their profile folder."
+      },
+      {
+        "command": "icacls C:\\Users\\Username /inheritance:r /grant:r Username:F",
+        "description": "Reset inherited permissions and grant direct full control."
+      }
+    ]
+  },
+  {
+    "problem": "Migrate user profile data to new account",
+    "solutions": [
+      {
+        "command": "robocopy C:\\Users\\OldUser C:\\Users\\NewUser /E /COPYALL /XJD",
+        "description": "Copy all profile files from old user to new user account folder."
+      },
+      {
+        "command": "icacls C:\\Users\\NewUser /grant NewUser:F /t",
+        "description": "Grant the new user full control over the copied profile folder."
+      }
+    ]
+  },
+  {
+    "problem": "AppData folder missing from user profile",
+    "solutions": [
+      {
+        "command": "attrib -h -s C:\\Users\\Username\\AppData",
+        "description": "Remove hidden and system attributes to make AppData visible."
+      },
+      {
+        "command": "icacls C:\\Users\\Username\\AppData /grant Username:F /t",
+        "description": "Restore permissions on the AppData folder."
+      }
+    ]
+  },
+  {
+    "problem": "Registry hive for user profile not loading",
+    "solutions": [
+      {
+        "command": "reg load HKU\\TempUser C:\\Users\\Username\\NTUSER.DAT",
+        "description": "Manually load the user registry hive for repair or inspection."
+      },
+      {
+        "command": "reg unload HKU\\TempUser",
+        "description": "Unload the registry hive after making repairs."
+      }
+    ]
+  },
+  {
+    "problem": "Desktop items missing after profile corruption",
+    "solutions": [
+      {
+        "command": "attrib -h -s C:\\Users\\Username\\Desktop\\*",
+        "description": "Remove hidden/system attribute from Desktop items that may be hidden."
+      },
+      {
+        "command": "icacls C:\\Users\\Username\\Desktop /grant Username:F /t",
+        "description": "Restore full permissions on the Desktop folder."
+      }
+    ]
+  },
+  {
+    "problem": "User profile size too large causing storage issues",
+    "solutions": [
+      {
+        "command": "wmic useraccount list brief",
+        "description": "List all user accounts to identify which profiles exist on the system."
+      },
+      {
+        "command": "del /q /f /s C:\\Users\\Username\\AppData\\Local\\Temp\\*",
+        "description": "Delete temporary files from the user profile to free space."
+      },
+      {
+        "command": "cleanmgr /sagerun:1",
+        "description": "Run disk cleanup to remove profile-related temporary and cached files."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Explorer crashes and restarts repeatedly",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM explorer.exe && start explorer.exe",
+        "description": "Force-terminate and restart Windows Explorer to clear a crash loop."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted Explorer shell files causing the crash."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to fix Explorer shell dependencies."
+      }
+    ]
+  },
+  {
+    "problem": "File Explorer freezes when opening a folder",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM explorer.exe && start explorer.exe",
+        "description": "Restart Explorer to clear a frozen state when opening folders."
+      },
+      {
+        "command": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v SeparateProcess /t REG_DWORD /d 1 /f",
+        "description": "Run File Explorer windows in a separate process to prevent full freezes."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Explorer not showing network drives",
+    "solutions": [
+      {
+        "command": "net use",
+        "description": "List all mapped network drives to verify their connection status."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v EnableLinkedConnections /t REG_DWORD /d 1 /f",
+        "description": "Enable linked connections so network drives show in both admin and user Explorer."
+      },
+      {
+        "command": "taskkill /F /IM explorer.exe && start explorer.exe",
+        "description": "Restart Explorer to refresh network drive mappings."
+      }
+    ]
+  },
+  {
+    "problem": "Context menu in File Explorer extremely slow",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted shell extension DLLs causing slow context menus."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to fix shell handler registration issues."
+      }
+    ]
+  },
+  {
+    "problem": "File Explorer search not working",
+    "solutions": [
+      {
+        "command": "net stop WSearch && net start WSearch",
+        "description": "Restart the Windows Search service to restore File Explorer search."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Search\" /v SetupCompletedSuccessfully /t REG_DWORD /d 0 /f",
+        "description": "Force a search index rebuild to fix Explorer search results."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Explorer address bar not responding",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM explorer.exe && start explorer.exe",
+        "description": "Restart Explorer to unfreeze the address bar."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted Explorer shell files causing the unresponsive address bar."
+      }
+    ]
+  },
+  {
+    "problem": "Windows Explorer crashing due to shell extension",
+    "solutions": [
+      {
+        "command": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Approved\"",
+        "description": "List approved shell extensions to identify third-party ones causing crashes."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system shell extension files to prevent Explorer crashes."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Restore the Windows image to fix shell extension infrastructure."
+      }
+    ]
+  },
+  {
+    "problem": "File copy progress dialog freezes in Explorer",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM explorer.exe && start explorer.exe",
+        "description": "Restart Explorer to unfreeze the stuck file copy dialog."
+      },
+      {
+        "command": "net stop LanmanWorkstation && net start LanmanWorkstation",
+        "description": "Restart the Workstation service if the freeze occurs during network copies."
+      }
+    ]
+  },
+  {
+    "problem": "Task Manager disabled by administrator policy",
+    "solutions": [
+      {
+        "command": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v DisableTaskMgr /t REG_DWORD /d 0 /f",
+        "description": "Remove the current user policy that disables Task Manager."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v DisableTaskMgr /t REG_DWORD /d 0 /f",
+        "description": "Remove the machine-wide policy that disables Task Manager."
+      }
+    ]
+  },
+  {
+    "problem": "Task Manager not responding when opened",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM Taskmgr.exe",
+        "description": "Force-terminate the frozen Task Manager process."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair corrupted taskmgr.exe or dependent system files."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore Task Manager functionality."
+      }
+    ]
+  },
+  {
+    "problem": "Task Manager showing blank white window",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM Taskmgr.exe",
+        "description": "Kill the blank Task Manager instance."
+      },
+      {
+        "command": "reg delete \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\TaskManager\" /va /f",
+        "description": "Clear Task Manager's saved state settings that may cause display issues."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files used by Task Manager's rendering."
+      }
+    ]
+  },
+  {
+    "problem": "Task Manager missing Performance tab",
+    "solutions": [
+      {
+        "command": "reg delete \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\TaskManager\" /va /f",
+        "description": "Reset Task Manager settings to restore all default tabs."
+      },
+      {
+        "command": "taskkill /F /IM Taskmgr.exe",
+        "description": "Close and reopen Task Manager after clearing settings."
+      }
+    ]
+  },
+  {
+    "problem": "Cannot open Task Manager - access denied",
+    "solutions": [
+      {
+        "command": "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v DisableTaskMgr /t REG_DWORD /d 0 /f",
+        "description": "Remove user-level policy restriction on Task Manager."
+      },
+      {
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v DisableTaskMgr /t REG_DWORD /d 0 /f",
+        "description": "Remove group policy restriction on Task Manager."
+      },
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that Task Manager security checks depend on."
+      }
+    ]
+  },
+  {
+    "problem": "Task Manager startup tab not showing all entries",
+    "solutions": [
+      {
+        "command": "wmic startup get Caption,Command,Location",
+        "description": "List all startup items via WMI as an alternative to Task Manager's Startup tab."
+      },
+      {
+        "command": "reg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\"",
+        "description": "Query current user startup registry entries directly."
+      },
+      {
+        "command": "reg query \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\"",
+        "description": "Query machine-wide startup registry entries directly."
+      }
+    ]
+  },
+  {
+    "problem": "Task Manager CPU graph not updating",
+    "solutions": [
+      {
+        "command": "taskkill /F /IM Taskmgr.exe",
+        "description": "Close the frozen Task Manager to restart it fresh."
+      },
+      {
+        "command": "reg delete \"HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\TaskManager\" /va /f",
+        "description": "Reset Task Manager state that may freeze the graph update timer."
+      }
+    ]
+  },
+  {
+    "problem": "Task Manager processes list empty or not loading",
+    "solutions": [
+      {
+        "command": "sfc /scannow",
+        "description": "Repair system files that populate the Task Manager process list."
+      },
+      {
+        "command": "dism /online /cleanup-image /restorehealth",
+        "description": "Repair the Windows image to restore WMI and Task Manager data sources."
+      },
+      {
+        "command": "net stop winmgmt && net start winmgmt",
+        "description": "Restart WMI service which Task Manager uses to enumerate processes."
+      }
+    ]
+  }
+]
