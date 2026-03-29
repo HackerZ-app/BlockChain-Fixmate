@@ -92,6 +92,23 @@ def _run_safe_command(cmd: str) -> dict:
     except subprocess.TimeoutExpired:
         raise
 
+
+def _windows_only_execution_error(cmd: str, desc: str, sid: int) -> dict:
+    host = platform.system() or "Unknown"
+    return {
+        "success": False,
+        "output": "",
+        "error": (
+            "Command execution is Windows-only, but this server is running on "
+            f"{host}. Run FIXMATE on a Windows machine to execute remediation commands."
+        ),
+        "return_code": -1,
+        "command": cmd,
+        "simulation_mode": False,
+        "solution_id": sid,
+        "description": desc,
+    }
+
 if os.environ.get("AI_TS_DEBUG_GEMINI", "").strip().lower() in {"1", "true", "yes", "on"}:
     app.logger.setLevel(logging.INFO)
 
@@ -1222,6 +1239,12 @@ def execute():
     sol = solutions[sid]
     cmd = sol.get("command", "")
     desc = sol.get("description", "")
+
+    if not _is_windows():
+        result = _windows_only_execution_error(cmd, desc, sid)
+        log_execution(user_error, matched.get("problem", ""), desc, cmd, result)
+        return jsonify(result), 400
+
     app.logger.info("APPLY: command: %s", cmd)
     try:
         _result = _run_safe_command(cmd)
@@ -1271,6 +1294,14 @@ def execute_all():
     for i, sol in enumerate(solutions):
         cmd = sol.get("command", "")
         desc = sol.get("description", "")
+
+        if not _is_windows():
+            res = _windows_only_execution_error(cmd, desc, i)
+            results.append(res)
+            overall = False
+            log_execution(user_error, matched.get("problem", ""), desc, cmd, res)
+            continue
+
         app.logger.info("APPLY: command: %s", cmd)
         try:
             _res_data = _run_safe_command(cmd)
